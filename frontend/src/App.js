@@ -3,7 +3,7 @@ import './App.css';
 import Nav from './components/Nav';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Home from './components/Home';
-import Tweet from './components/Tweet';
+import Employees from './components/Employees';
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
       <header className="App-header">
         <Nav />
         <Switch>
-          <Route path="/" exact component={Home}/>
-          <Route path="/tweets" exact component={Tweet}/>
+          <Route path="/" exact component={Home}/> 
+          <Route path="/employees" exact component={Employees}/>
         </Switch>
       </header>
     </div>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 // import {Link} from 'react-router-dom';
 
-function Tweet() {
+function Employees() {
     useEffect( () => {
         fetchItems();
     }, []);
@@ -9,7 +9,7 @@ function Tweet() {
     const [items, setItems] = useState([]);
 
     const fetchItems = async () => {
-        const data = await fetch('/tweets'); //where the data comes from
+        const data = await fetch('/employees'); //where the data comes from
         const items = await data.json();
         setItems(items);
     };
@@ -30,9 +30,12 @@ function Tweet() {
                 //     </div>
                 // </div>
                 <div>
-                    <p>{item.name}</p>
-                    <p>{item.mas}</p>
-                    <p>{item.username}</p>
+                    <p>{item.firstname}</p>
+                    <p>{item.lastname}</p>
+                    <p>{item.email}</p>
+                    <p>{item.status}</p>
+
+                  
 
                 </div>
             ))
@@ -41,4 +44,4 @@ function Tweet() {
     );
 }
 
-export default Tweet;
+export default Employees;
