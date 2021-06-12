@@ -34,7 +34,7 @@ function Employees() {
                 items.map(item => (
                     <div class="row padding">
                         <div class="alert alert-info rounded-pill" role="alert">
-                            <i class="fa fa-user mr-2"></i> <i>{item.firstname} {item.lastname}, {item.email}</i>
+                            <i class="fa fa-user mr-2"></i> <i>{item.firstname} {item.lastname}, {item.email} {item.status.name}</i>
                         </div>
                     </div>       
                 ))
