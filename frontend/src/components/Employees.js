@@ -7,7 +7,6 @@ function Employees() {
     }, []);
 
     const [items, setItems] = useState([]);
-
     const fetchItems = async () => {
         const data = await fetch('/employees'); //where the data comes from
         const items = await data.json();
