@@ -16,30 +16,30 @@ function Employees() {
 
     return(
         <section>
-            {
-            items.map(item => (
-                // <div class="container-fluid p-3 w-50">
-                //     <div class="card-deck">
-                //         <div class="card">
-                //             <div class="card-body p-1">
-                //                 <h6 class="card-title">{item.name}</h6>
-                //                 <p class="card-text">{item.msg}</p>
-                //                 <p class="card-text"><i>by {item.username}</i></p>
-                //             </div>
-                //         </div>
-                //     </div>
-                // </div>
-                <div>
-                    <p>{item.firstname}</p>
-                    <p>{item.lastname}</p>
-                    <p>{item.email}</p>
-                    <p>{item.status}</p>
+            
+            <div class="container-fluid">
+                <h1 class="mt-5">Employees</h1>
+                <form method="POST" action="/addEmployee">
+                    <div class="input-group justify-content-center">
+                        <div class="input-group-prepend">
+                            <input type="text" name="firstname" class="form-control" />
+                            <input type="text" name="lastname" class="form-control" />
+                            <input type="text" name="email" class="form-control" />
+                            <input type="submit" value="Send" class="btn btn-primary mb-2" />
+                        </div>
+                    </div>
+                </form>
 
-                  
-
-                </div>
-            ))
-            }
+                {
+                items.map(item => (
+                    <div class="row padding">
+                        <div class="alert alert-info rounded-pill" role="alert">
+                            <i class="fa fa-user mr-2"></i> <i>{item.firstname} {item.lastname}, {item.email}</i>
+                        </div>
+                    </div>       
+                ))
+                }
+            </div>
         </section>
     );
 }

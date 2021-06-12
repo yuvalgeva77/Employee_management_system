@@ -18,12 +18,15 @@ router.get('/employees',async (req, res) => {
 
 router.get('/addEmployee', async (req, res) => {
     const employees = Schemas.Employees;
-    const userstatus = await employees.findOne({firstname:'Yuval'}).exec();
+    const statuses = Schemas.Status;
+
+    const status = await statuses.findOne({name:'Working'}).exec();
     const Employee = {
-        firstname: 'Sensei', 
+        firstname: 'Sensei2', 
         lastname: ' Johnny',
         email:'Sensei@gmail.com',
-        status: userstatus.id
+        status: status._id
+    
     };
     const newEmployee = new Schemas.Employees(Employee);
     try {
@@ -34,6 +37,34 @@ router.get('/addEmployee', async (req, res) => {
     } catch(err) {
         console.log(err);
         res.end('User not added!');
+    }
+});
+
+router.post('/addEmployee', async (req, res) => {
+    const employeeFirstnamea = req.body.firstname;
+    const employeeLastnamea = req.body.lastname;
+    const employeeEmail = req.body.email;
+    const user = Schemas.Employees;
+    const statuses = Schemas.Status;
+    const status = await statuses.findOne({name:'Working'}).exec();
+
+    const newEmployee = new Schemas.Employees({
+        firstname: employeeFirstnamea, 
+        lastname: employeeLastnamea,
+        email:employeeEmail,
+        status: status._id
+    });
+
+    try {
+        await newEmployee.save( (err, newEmployeeResults) => {
+            if (err) res.end('Error Saving.');
+            res.redirect('/employees');
+            res.end();
+        });
+    } catch(err) {
+        console.log(err);
+        res.redirect('/employees');
+        res.end();
     }
 });
 
