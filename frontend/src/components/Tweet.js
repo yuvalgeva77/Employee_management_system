@@ -9,7 +9,7 @@ function Tweet() {
     const [items, setItems] = useState([]);
 
     const fetchItems = async () => {
-        const data = await fetch('/tweets');
+        const data = await fetch('/tweets'); //where the data comes from
         const items = await data.json();
         setItems(items);
     };
