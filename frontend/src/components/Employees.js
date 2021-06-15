@@ -1,21 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {  useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 // import {Link} from 'react-router-dom';
 
-function Employees() {
+function Employees({authorized}) {
     useEffect( () => {
         fetchItems();
     }, []);
 
+  
+    
+   
     const [items, setItems] = useState([]);
     const fetchItems = async () => {
         const data = await fetch('/employees'); //where the data comes from
         const items = await data.json();
         setItems(items);
     };
-
+    
+    // if(!authorized){
+    //     return  <Redirect to="/login"/>;
+    // }
     return(
         <section>
-            
             <div class="container-fluid">
                 <h1 class="mt-5">Employees</h1>
                 <form method="POST" action="/addEmployee">
@@ -41,6 +47,7 @@ function Employees() {
             </div>
         </section>
     );
+  
 }
 
 export default Employees;

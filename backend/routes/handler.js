@@ -1,4 +1,5 @@
 const express = require('express');
+//const { default: Employees } = require('../../frontend/src/components/Employees.js');
 const router = express.Router();
 const Schemas = require('../models/Schemas.js');
 
@@ -85,18 +86,25 @@ router.post('/addEmployee', async (req, res) => {
 router.post('/login', async (req, res) => {
     const employeeEmail = req.body.email;
     const employees = Schemas.Employees;
-    let result = await employees.findOne({ email:employeeEmail }).exec();
+    const result = await employees.findOne({ email:employeeEmail }).exec();
     console.log(result);
 
     // const status = await statuses.findOne({email:employeeEmail}).exec();
     if (result) {
 
         res.status(200).send({ message: "Succesful login" })
+        // /<component{()=><Employees authorized={true}/>}/>
+        //  res.redirect('/Employees');
+        res.redirect('/employees');
+
+
     }
     else {
        
-            res.status(200).send({ message: "no such user" })
-        
+           // res.status(200).send({ message: "no such user" })
+            // res.redirect('/login');
+            res.end('Error Saving.');
+            res.redirect('/');
 
     }
 }
