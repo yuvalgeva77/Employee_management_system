@@ -86,27 +86,46 @@ router.post('/addEmployee', async (req, res) => {
 router.post('/login', async (req, res) => {
     const employeeEmail = req.body.email;
     const employees = Schemas.Employees;
-    const result = await employees.findOne({ email:employeeEmail }).exec();
-    console.log(result);
+    console.log(employeeEmail);
+    try {
+        const result = await employees.findOne({ email:employeeEmail }).exec() 
+        const Employeesstatuses = await employees.find({email:employeeEmail}).populate("status").exec((err, statustData) => {
+        if (err) throw err;
+        if (statustData) {
+            res.end(JSON.stringify(statustData));
+        } else {
+            res.end();
+        }
+    });
+        // console.log(result);
+    
+        // const status = await statuses.findOne({email:employeeEmail}).exec();
+        // if (result!=null) {
+    
+        //     res.status(200).send({ message: "Succesful login" })
+        //     res.end();
 
-    // const status = await statuses.findOne({email:employeeEmail}).exec();
-    if (result) {
+        //     // /<component{()=><Employees authorized={true}/>}/>
+        //     //  res.redirect('/Employees');
+        //     // res.redirect('/employees');
+    
+    
+        // }
+        // else {
+           
+        //         res.status(200).send({ message: "no such user" })
+        //         // res.redirect('/login');
+        //         res.end('Error Saving.');
+        //         // res.redirect('/');
+    
+        // }
+        
+    } catch (error) {
+        console.log(err);
 
-        res.status(200).send({ message: "Succesful login" })
-        // /<component{()=><Employees authorized={true}/>}/>
-        //  res.redirect('/Employees');
-        res.redirect('/employees');
-
-
+        res.end();  
     }
-    else {
-       
-           // res.status(200).send({ message: "no such user" })
-            // res.redirect('/login');
-            res.end('Error Saving.');
-            res.redirect('/');
-
-    }
+ 
 }
 )
 

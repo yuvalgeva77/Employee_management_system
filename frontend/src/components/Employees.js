@@ -17,9 +17,9 @@ function Employees({authorized}) {
         setItems(items);
     };
     
-    // if(!authorized){
-    //     return  <Redirect to="/login"/>;
-    // }
+    if(!authorized){
+        return  <Redirect to="/login"/>;
+    }
     return(
         <section>
             <div class="container-fluid">

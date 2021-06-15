@@ -11,13 +11,34 @@ function Login() {
   let history = useHistory();
 
   function Loginclick() {
-    {/* <Employees authorized={true}></Employees> */}
-      console.log('You clicked submit.');
-      history.push("/employees");
+    console.log('You clicked submit.');
+    let request = {
+      email: document.getElementById('exampleInputEmail1').value
     }
+    axios.post(('/login'), { request })
+      .then(resp => {
+        //alert(resp.data.message);
+        if (resp != []) {
+          <Employees authorized={true}></Employees>
+          history.push("/employees");
+          console.log(resp);
+        }
+
+        else {
+          <Employees authorized={false}></Employees>
+
+          console.log("no such user");
+
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+  }
   return (
     <div>
-      <form>
+      <form method="POST" action="/login">
         <div class="mb-3">
           {/* <h4>Login:</h4> */}
           <label for="exampleInputEmail1" class="form-label"> </label>
@@ -25,7 +46,7 @@ function Login() {
         </div>
 
         <button type="submit"
-          onClick={Loginclick }
+          onClick={Loginclick}
           class="btn btn-primary">log in</button>
         {/* <button type="new user" class="btn btn-primary">new user</button> */}
 
